@@ -9,18 +9,18 @@
  */
 int main(void)
 {
-      int start_ascii = 48;
-      int i = start_ascii;
+	int start_ascii = 48;
+	int i = start_ascii;
 
-      while (i < start_ascii + 10)
-      {
-	    if (i != start_ascii)
-	    {
-		  putchar(',');
-		  putchar(' ');
-	    }
-	    putchar(i++);
-      }
-      putchar('\n');
-    return (0);
+	while (i < start_ascii + 10)
+	{
+		if (i != start_ascii)
+		{
+			putchar(',');
+			putchar(' ');
+		}
+		putchar(i++);
+	}
+	putchar('\n');
+	return (0);
 }
