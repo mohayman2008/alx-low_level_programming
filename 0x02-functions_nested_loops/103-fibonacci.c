@@ -9,18 +9,17 @@
 
 int main(void)
 {
-	const int COUNT = 50;
 	const unsigned long MAX = 4000000;
 	int i = 0;
 	unsigned long tmp1 = 1, tmp2 = 2;
 	unsigned long current = 0;
 	unsigned long sum = 2; /* Adding 2 which is the first even number */
 
-	while (i < COUNT - 2)
+	while (current <= MAX)
 	{
 		current = tmp1 + tmp2;
 
-		if (current <= MAX)
+		if (current % 2 == 0)
 			sum += current;
 		tmp1 = tmp2;
 		tmp2 = current;
