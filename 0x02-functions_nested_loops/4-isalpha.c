@@ -2,8 +2,7 @@
 
 /**
  * _isalpha - checks for lowercase letter
- *
- * c - integer
+ * @c: Character ASCII number
  *
  * Return: 1 if letter, 0 otherwise
  */

@@ -1,9 +1,8 @@
 #include "main.h"
 
 /**
- * print_sign - checks for lowercase letter
- *
- * int n: input number
+ * print_sign - prints the sign of a number
+ * @n: number to check
  *
  * Return: 1 if +ve, 0 if 0 , -1 if -ve
  */
