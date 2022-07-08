@@ -1,4 +1,5 @@
 #include "main.h"
+#include <limits.h>
 
 /**
  * print_number - print number using _putchar(char) recursivly
@@ -9,6 +10,13 @@
 
 void print_number(int n)
 {
+	if (n == INT_MIN)
+	{
+		_putchar('-');
+		print_number(n / 2 * -1);
+		return;
+	}
+
 	if (n < 0)
 	{
 		_putchar('-');
@@ -24,5 +32,5 @@ void print_number(int n)
 	}
 
 	print_number(n / 10);
-	print_number(n % 10);
+	_putchar(n % 10 + 48);
 }
