@@ -1,4 +1,4 @@
-#include <main.h>
+#include "main.h"
 
 /**
  * reset_to_98 - set an int passed by reference to be equal to 98
