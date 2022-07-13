@@ -22,7 +22,7 @@ int _strlen(char *s)
  * @s1: first string
  * @s2: second string
  *
- * Return: (+ve, 0, -ve) int if s1 is (greater than, equal to, less than) s2
+ * Return: (+ve, 0, -ve) int if s1 (is greater than, matches, is less than) s2
  */
 int _strcmp(char *s1, char *s2)
 {
@@ -33,7 +33,7 @@ int _strcmp(char *s1, char *s2)
 	{
 		int len = _strlen(s2);
 
-		return (s1[len] - s2[len]);
+		return (s1[len]);
 	}
 
 	while (s1[i] != '\0')
