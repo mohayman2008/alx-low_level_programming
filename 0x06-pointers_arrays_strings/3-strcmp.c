@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "main.h"
 
 /**
@@ -31,9 +32,17 @@ int _strcmp(char *s1, char *s2)
 
 	if (_strlen(s1) > _strlen(s2))
 	{
-		int len = _strlen(s2);
-
-		return (s1[len]);
+		if (_strlen(s1) != 0)
+		{
+			if (_strlen(s2) != 0)
+				return (s1[0] - s2[0]);
+			else
+				return (s1[0]);
+		}
+		else if (_strlen(s2) != 0)
+			return (-s2[0]);
+		else
+			return (0);
 	}
 
 	while (s1[i] != '\0')
