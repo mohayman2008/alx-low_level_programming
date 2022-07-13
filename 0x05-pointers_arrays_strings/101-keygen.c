@@ -15,12 +15,12 @@ int main(void)
 	char key[58];
 
 	srand(time(NULL));
-	
+
 	while (sum != 2772)
 	{
 		i = 0;
 		sum = 0;
-		
+
 		while (sum < (2772 - 'z'))
 		{
 			x = rand() % 62;
@@ -28,7 +28,7 @@ int main(void)
 			sum += pool[x];
 			i++;
 		}
-		
+
 		if (sum == 2772 - 'z')
 		{
 			key[i] = 'z';
