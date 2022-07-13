@@ -14,7 +14,7 @@ int main(void)
 	char pool[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 	char key[58];
 
-	srand(time());
+	srand(time(NULL));
 	
 	while (sum != 2772)
 	{
