@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 	}
 	cents = atoi(argv[1]);
 
-	for (i = 0 ; i < 5 ; i++)
+	for (i = 0 ; i < 5 && cents > 0 ; i++)
 	{
 		n = cents / values[i];
 		result += n;
