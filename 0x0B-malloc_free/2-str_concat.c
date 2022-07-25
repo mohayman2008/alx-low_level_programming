@@ -19,7 +19,7 @@ unsigned int sum_str_len(char **str, unsigned int size)
 		len = 0;
 		if (str[i])
 		{
-			while (str[len])
+			while (str[i][len])
 				len++;
 
 		}
@@ -54,8 +54,11 @@ char *str_concat(char *s1, char *s2)
 		for (i = 0 ; i < 2 ; i++)
 		{
 			j = 0;
-			for (; p[i][j] ; j++, idx++)
-				ptr[idx] = p[i][j];
+			if (p[i])
+			{
+				for (; p[i][j] ; j++, idx++)
+					ptr[idx] = p[i][j];
+			}
 		}
 	}
 	ptr[idx] = '\0';
