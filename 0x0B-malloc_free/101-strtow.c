@@ -25,6 +25,8 @@ char **strtow(char *str)
 		for (; str[i] && str[i] != ' ' ; i++)
 			size++;
 	}
+	if (!count)
+		return (NULL);
 
 	size = sizeof(char *) * (count + 1) + sizeof(char) * (size + count);
 	str_arr = malloc((size_t) size);
