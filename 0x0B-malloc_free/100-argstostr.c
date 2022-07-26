@@ -38,7 +38,7 @@ unsigned int sum_str_len(char **str, unsigned int size)
  */
 char *argstostr(int ac, char **av)
 {
-        int size, idx = 0, i, j;
+	int size, idx = 0, i, j;
 	char *ptr;
 
 	if (!av || ac < 1)
