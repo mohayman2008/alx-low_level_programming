@@ -5,7 +5,7 @@
 void *_calloc_ASCII0(unsigned int nmemb, unsigned int size);
 int _strlen(char *s);
 int _is_number(char *s);
-void clean_num(char **s);
+int clean_num(char **s);
 void err(char *msg, unsigned int x);
 void rev_string(char *s);
 
@@ -62,14 +62,25 @@ int _is_number(char *s)
 {
 	unsigned int i = 0;
 
-	while (s[i])
+	while (s[i] == '-' || s[i] == '+')
+		i++;
+
+	if (s[i] >= '0' && s[i] <= '9')
 	{
-		if (s[i] >= '0' && s[i] <= '9')
-			i++;
-		else
-			return (0);
+		i++;
+		while (s[i])
+		{
+			if (s[i] >= '0' && s[i] <= '9')
+				i++;
+			else
+			{
+				return (0);
+			}
+		}
+		return (1);
 	}
-	return (1);
+	else
+		return (0);
 }
 
 /**
@@ -82,12 +93,26 @@ int _is_number(char *s)
  *
  * Return: (+1) if (+ve) or (-1) if -ve or (0) if zero
  */
-void clean_num(char **s)
+int clean_num(char **s)
 {
+	int m = 1;
+	unsigned int i = 0;
+
+	while ((*s)[i] == '-' || (*s)[i] == '+')
+	{
+		if ((*s)[i] == '-')
+			m *= -1;
+		i++;
+	}
+	*s += i;
 	while (**s && **s == '0') /* cleaning zeros */
 		(*s)++;
 	if (!**s)
+	{
 		(*s)--;
+		return (0);
+	}
+	return (m);
 }
 
 /**
@@ -136,7 +161,7 @@ void rev_string(char *s)
 int main(int argc, char **argv)
 {
 	unsigned int size, len1, len2, idx = 0;
-	int i, j, co, mul, sum;
+	int i, j, sign, co, mul, sum;
 	char *out;
 
 	if (argc != 3)
@@ -144,11 +169,10 @@ int main(int argc, char **argv)
 	if (!_is_number(argv[1]) || !_is_number(argv[2]))
 		err("Error\n", 98);
 
-	clean_num(argv + 1);
-	clean_num(argv + 2);
+	sign = clean_num(argv + 1) * clean_num(argv + 2);
 	len1 = _strlen(argv[1]);
 	len2 = _strlen(argv[2]);
-	size = (len1 + len2 + 1);
+	size = (len1 + len2 + 1 + (sign == -1 ? 1 : 0));
 	out = _calloc_ASCII0(size, sizeof(*out));
 	if (!out)
 		err("Error\n", 98);
@@ -167,6 +191,8 @@ int main(int argc, char **argv)
 		out[idx] = co + 48;
 	}
 	idx = out[idx] == '0' ? idx : idx + 1;
+	if (sign == -1)
+		out[idx++] = '-';
 	out[idx] = '\0';
 	rev_string(out);
 	printf("%s\n", out);
