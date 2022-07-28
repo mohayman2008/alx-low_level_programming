@@ -89,7 +89,8 @@ void clean_num(char **s)
 	while (**s && **s == '0') /* cleaning zeros */
 		(*s)++;
 	if (!**s)
-		(*s)--;
+		err("0\n", EXIT_SUCCESS);
+		/*(*s)--;*/
 }
 
 /**
