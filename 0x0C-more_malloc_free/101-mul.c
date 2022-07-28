@@ -62,9 +62,6 @@ int _is_number(char *s)
 {
 	unsigned int i = 0;
 
-	if (!*s)
-		return (0);
-
 	while (s[i])
 	{
 		if (s[i] >= '0' && s[i] <= '9')
@@ -87,6 +84,8 @@ int _is_number(char *s)
  */
 void clean_num(char **s)
 {
+	if (!**s)
+		err("0\n", EXIT_SUCCESS);
 	while (**s && **s == '0') /* cleaning zeros */
 		(*s)++;
 	if (!**s)
