@@ -98,6 +98,9 @@ int clean_num(char **s)
 	int m = 1;
 	unsigned int i = 0;
 
+	if (!**s)
+		err("Please enter a number not an empty string\n", 98);
+
 	while ((*s)[i] == '-' || (*s)[i] == '+')
 	{
 		if ((*s)[i] == '-')
@@ -164,12 +167,12 @@ int main(int argc, char **argv)
 	int i, j, sign, co, mul, sum;
 	char *out;
 
-	if (argc != 3)
-		err("Error\n", 98);
-	if (!_is_number(argv[1]) || !_is_number(argv[2]))
+	if (!(argc == 3 && _is_number(argv[1]) && _is_number(argv[2])))
 		err("Error\n", 98);
 
 	sign = clean_num(argv + 1) * clean_num(argv + 2);
+	if (sign == 0)
+		err("0\n", EXIT_SUCCESS);
 	len1 = _strlen(argv[1]);
 	len2 = _strlen(argv[2]);
 	size = (len1 + len2 + 1 + (sign == -1 ? 1 : 0));
