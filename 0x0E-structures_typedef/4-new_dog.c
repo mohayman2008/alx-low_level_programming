@@ -4,6 +4,35 @@
 #include "dog.h"
 
 /**
+ * _strdup - copy a string to allocated memory after allocating it
+ * @str: string to be duplicated
+ *
+ * Return: pointer to the duplicate string or NULL (in case of failure to
+ *	allocate memory or if str is NULL)
+ */
+char *_strdup(char *str)
+{
+	char *ptr;
+	unsigned int i, len = 0;
+
+	if (!str)
+		return (NULL);
+
+	while (str[len])
+		len++;
+
+	ptr = malloc(sizeof(char) * len + 1);
+	if (!ptr)
+		return (NULL);
+
+	for (i = 0 ; i < len ; i++)
+		ptr[i] = str[i];
+	ptr[len] = '\0';
+
+	return (ptr);
+}
+
+/**
  * new_dog - creates a new object of type dog_t
  * @name: Dog's name
  * @age: Dog's age
@@ -18,24 +47,9 @@ dog_t *new_dog(char *name, float age, char *owner)
 	if (dog == NULL)
 		return (NULL);
 
-	if (name)
-		dog->name = strdup(name);
-	else
-	{
-		free(dog);
-		return (NULL);
-	}
-
+	dog->name = _strdup(name);
 	dog->age = age;
-
-	if (owner)
-		dog->owner = strdup(owner);
-	else
-	{
-		free(dog->name);
-		free(dog);
-		return (NULL);
-	}
+	dog->owner = _strdup(owner);
 
 	return (dog);
 }
