@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "dog.h"
 
 /**
@@ -50,6 +49,16 @@ dog_t *new_dog(char *name, float age, char *owner)
 	dog->name = _strdup(name);
 	dog->age = age;
 	dog->owner = _strdup(owner);
+
+	if (!dog->name || !dog->owner)
+	{
+		if (dog->name)
+			free(dog->name);
+		if (dog->owner)
+			free(dog->owner);
+		free(dog);
+		return (NULL);
+	}
 
 	return (dog);
 }
