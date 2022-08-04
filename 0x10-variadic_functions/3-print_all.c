@@ -27,12 +27,16 @@ void print_float(va_list ap)
 void print_string(va_list ap)
 {
 	char *str = va_arg(ap, char *);
-	if (str)
-	{
-		printf("%s", str);
-		return;
-	}
-	printf("(nil)");
+
+	printf("%s", str);
+/**
+ *	if (str)
+ *	{
+ *		printf("%s", str);
+ *		return;
+ *	}
+ *	printf("(nil)");
+*/
 }
 
 /**
