@@ -6,37 +6,39 @@
 typedef struct fmt
 {
 	char *fmt_c;
-	void (*print)(va_list);
+	int (*print)(va_list);
 } fmt;
 
-void print_char(va_list ap)
+int print_char(va_list ap)
 {
 	printf("%c", (char) va_arg(ap, int));
+	return (1);
 }
 
-void print_int(va_list ap)
+int print_int(va_list ap)
 {
 	printf("%d", va_arg(ap, int));
+	return (1);
 }
 
-void print_float(va_list ap)
+int print_float(va_list ap)
 {
 	printf("%f", (float) va_arg(ap, double));
+	return (1);
 }
 
-void print_string(va_list ap)
+int print_string(va_list ap)
 {
 	char *str = va_arg(ap, char *);
 
-	printf("%s", str);
-/**
- *	if (str)
- *	{
- *		printf("%s", str);
- *		return;
- *	}
- *	printf("(nil)");
-*/
+	if (str)
+	{
+		printf("%s", str);
+		return (1);
+	}
+	printf("(nil)");
+
+	return (1);
 }
 
 /**
@@ -61,15 +63,12 @@ void print_all(const char * const format, ...)
 		j = 0;
 	        while (fmt_a[j].fmt_c)
 		{
-			if (format[i] == fmt_a[j].fmt_c[0])
-			{
-				fmt_a[j].print(ap);
-				break;
-			}
-			j++;
+		  if ((format[i] == fmt_a[j].fmt_c[0]) && fmt_a[j].print(ap) && format[i + 1])
+		    printf(", ");
+
+		  j++;
 		}
-		if (fmt_a[j].fmt_c && format[i + 1])
-			printf(", ");
+			
 		i++;
 	}
 	va_end(ap);
