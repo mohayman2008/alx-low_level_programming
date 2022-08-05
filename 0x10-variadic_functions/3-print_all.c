@@ -1,32 +1,49 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdarg.h>
 #include "variadic_functions.h"
 
-typedef struct fmt
-{
-	char *fmt_c;
-	int (*print)(va_list);
-} fmt;
-
+/**
+ * print_char - print a character from the 1st position of va_list
+ * @ap: list of optional arguments
+ *
+ * Return: always (1)
+ */
 int print_char(va_list ap)
 {
 	printf("%c", (char) va_arg(ap, int));
 	return (1);
 }
 
+/**
+ * print_int - print an integer from the 1st position of va_list
+ * @ap: list of optional arguments
+ *
+ * Return: always (1)
+ */
 int print_int(va_list ap)
 {
 	printf("%d", va_arg(ap, int));
 	return (1);
 }
 
+/**
+ * print_float - print a float from the 1st position of va_list
+ * @ap: list of optional arguments
+ *
+ * Return: always (1)
+ */
 int print_float(va_list ap)
 {
 	printf("%f", (float) va_arg(ap, double));
 	return (1);
 }
 
+/**
+ * print_string - print a string from the 1st position of va_list
+ * @ap: list of optional arguments
+ *
+ * Return: always (1)
+ */
 int print_string(va_list ap)
 {
 	char *str = va_arg(ap, char *);
@@ -58,17 +75,17 @@ void print_all(const char * const format, ...)
 	va_list ap;
 
 	va_start(ap, format);
-        while (format[i])
+	while (format[i])
 	{
 		j = 0;
-	        while (fmt_a[j].fmt_c)
+		while (fmt_a[j].fmt_c)
 		{
-		  if ((format[i] == fmt_a[j].fmt_c[0]) && fmt_a[j].print(ap) && format[i + 1])
-		    printf(", ");
+			if ((format[i] == fmt_a[j].fmt_c[0]) &&
+				fmt_a[j].print(ap) && format[i + 1])
+				printf(", ");
 
-		  j++;
+			j++;
 		}
-			
 		i++;
 	}
 	va_end(ap);
