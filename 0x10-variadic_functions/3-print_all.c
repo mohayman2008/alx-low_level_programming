@@ -10,7 +10,7 @@
  */
 int print_char(va_list ap)
 {
-	printf("%c", (char) va_arg(ap, int));
+	printf("%c", (unsigned char) va_arg(ap, unsigned int));
 	return (1);
 }
 
@@ -22,7 +22,7 @@ int print_char(va_list ap)
  */
 int print_int(va_list ap)
 {
-	printf("%d", va_arg(ap, int));
+	printf("%d", (int) va_arg(ap, int));
 	return (1);
 }
 
@@ -54,7 +54,6 @@ int print_string(va_list ap)
 		return (1);
 	}
 	printf("(nil)");
-
 	return (1);
 }
 
