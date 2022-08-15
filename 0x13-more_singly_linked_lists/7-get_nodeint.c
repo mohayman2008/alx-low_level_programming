@@ -4,6 +4,7 @@
  * get_nodeint_at_index - get an element of a <listint_t> list,
  *			at a certain index
  * @head: head of the list
+ * @index: index of the node to be retrieved
  *
  * Return: pointer to the element if it exists or NULL otherwise
  */
