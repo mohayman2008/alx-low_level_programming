@@ -10,14 +10,13 @@
  */
 listint_t *find_listint_loop(listint_t *head)
 {
-        listint_t *itr1, *itr2;
+	listint_t *itr1, *itr2;
 
 	if (!head)
 		return (NULL);
 
 	itr1 = head, itr2 = head;
-	do
-	{
+	do {
 		itr1 = itr1->next;
 		if (!itr1 || !itr2 || !itr2->next)
 			return (NULL);
@@ -29,7 +28,7 @@ listint_t *find_listint_loop(listint_t *head)
 				itr1 = itr1->next, itr2 = itr2->next;
 			return (itr1);
 		}
-	}while (itr1 != itr2);
+	} while (itr1 != itr2);
 
 	return (NULL);
 }
