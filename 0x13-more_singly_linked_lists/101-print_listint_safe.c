@@ -52,18 +52,18 @@ size_t print_listint_safe(const listint_t *head)
 	while (itr != loop)
 	{
 		count++;
-		printf("[0x%p] %d\n", (void *) itr, itr->n);
+		printf("[%p] %d\n", (void *) itr, itr->n);
 		itr = itr->next;
 	}
 	if (loop)
 	{
 		do {
 			count++;
-			printf("[0x%p] %d\n", (void *) itr, itr->n);
+			printf("[%p] %d\n", (void *) itr, itr->n);
 			itr = itr->next;
 		} while (itr != loop);
 
-		printf("-> [0x%p] %d\n", (void *) loop, loop->n);
+		printf("-> [%p] %d\n", (void *) loop, loop->n);
 	}
 
 	return (count);
