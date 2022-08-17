@@ -46,7 +46,7 @@ size_t print_listint_safe(const listint_t *head)
 	const listint_t *itr, *loop;
 
 	if (!head)
-		exit(98);
+		return (0);
 	itr = head, loop = find_loop(head);
 	/* loop will be NULL if no loop */
 	while (itr != loop)
