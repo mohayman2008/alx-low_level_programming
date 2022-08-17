@@ -1,14 +1,14 @@
 #include "lists.h"
 
 /**
- * find_listint_loop - finds the starting node of a loop in a <listint_t> list
+ * find_list_loop - finds the starting node of a loop in a <listint_t> list
  *			if loop is detected
  * @head: head of the list
  *
  * Return: pointer to the starting node of the loop or (NULL) on error or if
  *	no loop is detected
  */
-listint_t *find_listint_loop(listint_t *head)
+listint_t *find_list_loop(listint_t *head)
 {
 	listint_t *itr1, *itr2;
 
@@ -35,7 +35,7 @@ listint_t *find_listint_loop(listint_t *head)
 
 /**
  * free_listint_safe - free the dynamically allocated memory to a <listint_t>
- * 			list, safe to use with list with loops
+ *			list, safe to use with list with loops
  * @h: pointer to the head of the list
  *
  * Return: number of freed nodes
@@ -48,7 +48,7 @@ size_t free_listint_safe(listint_t **h)
 	if (!h || !*h)
 		return (0);
 
-	current = *h, loop = find_listint_loop(*h);
+	current = *h, loop = find_list_loop(*h);
 	/* loop will be NULL if no loop */
 	while (current != loop)
 	{
