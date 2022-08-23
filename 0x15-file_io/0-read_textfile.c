@@ -38,7 +38,6 @@ ssize_t read_textfile(const char *filename, size_t letters)
 		if (rd_count < to_read)
 			break;
 	}
-	write(STDOUT_FILENO, "\0", 1);
 
 	close(fd);
 	return (count);
