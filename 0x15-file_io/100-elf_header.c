@@ -258,8 +258,8 @@ void print_label(char *label)
  */
 int main(int ac, char **av)
 {
-	int fd, rd_count = 1, i = 0;
-	char buf[EI_NIDENT + sizeof(uint16_t)], *entry;
+	int fd;
+	unsigned char buf[EI_NIDENT + sizeof(uint16_t)];
 	unsigned char e_entry_str[sizeof(Elf64_Addr)];
 
 	Elf64_Addr __attribute__ ((unused)) *add64;
