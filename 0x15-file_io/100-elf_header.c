@@ -12,9 +12,10 @@ void print_label(char *label);
  * print_magic - prints the e_ident of the elf file
  * @buf: char buffer containing e_ident at offset 0
  * @size: size of e_ident
- * @filename: input file name
+ * @commandname: file name of the executable
  */
-void print_magic(const unsigned char *buf, unsigned int size, char *commandname)
+void print_magic(const unsigned char *buf, unsigned int size,
+		char *commandname)
 {
 	unsigned int i = 0;
 
@@ -29,9 +30,9 @@ void print_magic(const unsigned char *buf, unsigned int size, char *commandname)
 	}
 
 	printf("ELF Header:\n");
-	printf("  Magic:  ");
+	printf("  Magic:   ");
 	for (i = 0 ; i < size ; i++)
-		printf(" %02x", buf[i]);
+		printf("%02x ", buf[i]);
 	putchar('\n');
 }
 
