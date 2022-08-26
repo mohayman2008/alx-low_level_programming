@@ -14,7 +14,7 @@ void print_label(char *label);
  * @size: size of e_ident
  * @filename: input file name
  */
-void print_magic(const unsigned char *buf, unsigned int size, char *filename)
+void print_magic(const unsigned char *buf, unsigned int size, char *commandname)
 {
 	unsigned int i = 0;
 
@@ -22,11 +22,13 @@ void print_magic(const unsigned char *buf, unsigned int size, char *filename)
 	{
 		if (buf[i] != ELFMAG[i])
 		{
-			dprintf(STDERR_FILENO, "%s is not a valid ELF\n", filename);
+			dprintf(STDERR_FILENO, "%s: Error: Not an ELF file - ", commandname);
+			dprintf(STDERR_FILENO, "it has the wrong magic bytes at the start\n");
 			exit(98);
 		}
 	}
 
+	printf("ELF Header:\n");
 	printf("  Magic:  ");
 	for (i = 0 ; i < size ; i++)
 		printf(" %02x", buf[i]);
@@ -177,7 +179,7 @@ void print_type(const unsigned char *buf)
 {
 	uint16_t *type = (uint16_t *) (buf + EI_NIDENT);
 
-	print_label("Version");
+	print_label("Type");
 
 	switch (*type)
 	{
@@ -276,7 +278,7 @@ int main(int ac, char **av)
 			(EI_NIDENT + sizeof(uint16_t)))
 		err_read(av[1]);
 
-	print_magic(buf, EI_NIDENT, av[1]);
+	print_magic(buf, EI_NIDENT, av[0]);
 
 	print_class(buf), print_data(buf), print_version(buf);
 	print_osabi(buf), print_abi_version(buf), print_type(buf);
