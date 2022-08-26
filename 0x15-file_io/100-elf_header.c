@@ -27,7 +27,7 @@ void print_magic(const unsigned char *buf, unsigned int size, char *filename)
 		}
 	}
 
-	printf("Magic:  ");
+	printf("  Magic:  ");
 	for (i = 0 ; i < size ; i++)
 		printf(" %02x", buf[i]);
 	putchar('\n');
@@ -244,8 +244,8 @@ void print_label(char *label)
 
 	while (label[len])
 		len++;
-	printf("%s:", label);
-	for (len++ ; len < 35 ; len++)
+	printf("  %s:", label);
+	for (len += 3 ; len < 37 ; len++)
 		putchar(' ');
 }
 
@@ -279,7 +279,7 @@ int main(int ac, char **av)
 	print_magic(buf, EI_NIDENT, av[1]);
 
 	print_class(buf), print_data(buf), print_version(buf);
-	print_osabi(buf), print_type(buf);
+	print_osabi(buf), print_abi_version(buf), print_type(buf);
 
 	if (lseek(fd, sizeof(uint16_t) + sizeof(uint32_t), SEEK_CUR) < 0)
 		err_read(av[1]);
