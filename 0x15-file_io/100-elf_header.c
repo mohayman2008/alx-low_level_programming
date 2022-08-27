@@ -9,6 +9,24 @@
 void print_label(char *label);
 
 /**
+ * _pow - raise an integer to a power
+ * @base: the base integer
+ * @power: the power integer
+ *
+ * Return: The result
+ */
+int _pow(int base, int power)
+{
+	int i;
+
+	if (!power)
+		return (1);
+	for (i = 2 ; i <= power ; i++)
+		base *= base;
+	return (base);
+}
+
+/**
  * print_magic - prints the e_ident of the elf file
  * @buf: char buffer containing e_ident at offset 0
  * @size: size of e_ident
@@ -21,7 +39,7 @@ void print_magic(const unsigned char *buf, unsigned int size,
 
 	for (; i < 4 ; i++)
 	{
-		if (buf[i] != ELFMAG[i])
+		if (!buf[EI_CLASS] || buf[i] != ELFMAG[i])
 		{
 			dprintf(STDERR_FILENO, "%s: Error: Not an ELF file - ", commandname);
 			dprintf(STDERR_FILENO, "it has the wrong magic bytes at the start\n");
@@ -30,9 +48,9 @@ void print_magic(const unsigned char *buf, unsigned int size,
 	}
 
 	printf("ELF Header:\n");
-	printf("  Magic:   ");
+	printf("  Magic:  ");
 	for (i = 0 ; i < size ; i++)
-		printf("%02x ", buf[i]);
+		printf(" %02x", buf[i]);
 	putchar('\n');
 }
 
@@ -178,14 +196,20 @@ void print_abi_version(const unsigned char *buf)
  */
 void print_type(const unsigned char *buf)
 {
-	uint16_t *type = (uint16_t *) (buf + EI_NIDENT);
+	const unsigned char *raw = buf + EI_NIDENT;
+	uint16_t type = 0;
+
+	if (buf[EI_DATA] == ELFDATA2LSB)
+		type = raw[0] + raw[1] * 0xFF;
+	else if (buf[EI_DATA] == ELFDATA2MSB)
+		type = raw[0] * 0xFF + raw[1];
 
 	print_label("Type");
 
-	switch (*type)
+	switch (type)
 	{
 	case ET_NONE:
-		printf("NONE (Unknown type)");
+		printf("NONE (No file type)");
 		break;
 	case ET_REL:
 		printf("REL (Relocatable file)");
@@ -203,6 +227,34 @@ void print_type(const unsigned char *buf)
 		printf("<unknown: %02u>", buf[EI_NIDENT]);
 	}
 	putchar('\n');
+}
+
+/**
+ * print_entry - prints the e_entry of the elf file
+ * @buf: char buffer containing e_ident at offset 0
+ * @e_entry: char buffer containing e_entry
+ */
+void print_entry(const unsigned char *buf, const unsigned char *e_entry)
+{
+	int len = 4, i;
+	char *add = 0;
+
+	if (buf[EI_CLASS] == ELFCLASS64)
+		len = 8;
+
+	if (buf[EI_DATA] == ELFDATA2LSB)
+	{
+		for (i = 0 ; i < len ; i++)
+			add += e_entry[i] << 8 * i;
+	}
+	else if (buf[EI_DATA] == ELFDATA2MSB)
+	{
+		for (i = 0 ; i < len ; i++)
+			add += e_entry[i] << 8 * (len - 1 - i);
+	}
+
+	print_label("Entry point address");
+	printf("%p\n", add);
 }
 
 /**
@@ -290,11 +342,7 @@ int main(int ac, char **av)
 	if (read(fd, e_entry_str, sizeof(Elf64_Addr)) != sizeof(Elf64_Addr))
 		err_read(av[1]);
 
-	add64 = (Elf64_Addr *) e_entry_str, add32 = (Elf32_Addr *) e_entry_str;
-	if (buf[EI_CLASS] == ELFCLASS32)
-		print_label("Entry point address"), printf("%#x\n", *add32);
-	if (buf[EI_CLASS] == ELFCLASS64)
-		print_label("Entry point address"), printf("%#lx\n", *add64);
+	print_entry(buf, e_entry_str);
 
 	f_close(fd);
 	return (0);
