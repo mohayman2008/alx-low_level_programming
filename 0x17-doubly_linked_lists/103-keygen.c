@@ -113,8 +113,8 @@ int f6(char *user, int len __attribute__((unused)))
  */
 int main(int ac, char **av)
 {
-	unsigned char *user, pass[7], *hash;
-	int len, res, i;
+        char *user, pass[7], *hash;
+	int len, i;
 	unsigned long int x[] = {0x3877445248432d41, 0x42394530534e6c37,
 				0x4d6e706762695432, 0x74767a5835737956,
 				0x2b554c59634a474f, 0x71786636576a6d34,
@@ -131,7 +131,7 @@ int main(int ac, char **av)
 	len = strlen(user);
 	pass[6] = 0;
 
-	hash = (unsigned char *) &x;
+	hash = (char *) &x;
 	for (i = 0 ; i < 6 ; i++)
 		pass[i] = hash[func[i](user, len)];
 
