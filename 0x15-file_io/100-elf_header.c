@@ -9,24 +9,6 @@
 void print_label(char *label);
 
 /**
- * _pow - raise an integer to a power
- * @base: the base integer
- * @power: the power integer
- *
- * Return: The result
- */
-int _pow(int base, int power)
-{
-	int i;
-
-	if (!power)
-		return (1);
-	for (i = 2 ; i <= power ; i++)
-		base *= base;
-	return (base);
-}
-
-/**
  * print_magic - prints the e_ident of the elf file
  * @buf: char buffer containing e_ident at offset 0
  * @size: size of e_ident
