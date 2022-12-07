@@ -1,14 +1,14 @@
+CC := gcc
+SRC := main.c school.c
+OBJ := ${SRC:%.c=%.o}
+NAME := school
+
 # Build the executable
 #
 # USAGE:
 # make | make all  # Creates 'school' executable
 
 .PHONY = all
-
-CC := gcc
-SRC := main.c school.c
-OBJ := ${SRC:%.c=%.o}
-NAME := school
 
 all: ${NAME}
 
