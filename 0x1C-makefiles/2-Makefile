@@ -3,7 +3,5 @@ SRC := main.c school.c
 OBJ := ${SRC:%.c=%.o}
 NAME := school
 
-.PHONY = all
-
 all: ${OBJ} m.h
 	${CC} ${filter %.o,$^} -o ${NAME}
