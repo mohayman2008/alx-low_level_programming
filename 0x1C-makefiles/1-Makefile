@@ -1,10 +1,10 @@
-CC = gcc
-SRC = main.c school.c
-
 # Build the executable
 #
 # USAGE:
 # make | make all  # Creates 'school' executable
+
+CC = gcc
+SRC = main.c school.c
 
 .PHONY = all
 
