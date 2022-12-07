@@ -1,0 +1,9 @@
+# Build the executable
+#
+# USAGE:
+# make | make all  # Creates 'school' executable
+
+.PHONY = all
+
+all:
+	gcc main.c school.c -o school
