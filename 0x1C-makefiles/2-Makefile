@@ -12,8 +12,8 @@ NAME := school
 
 all: ${NAME}
 
-${NAME}: ${OBJ}
-	${CC} $^ -o $@
+${NAME}: ${OBJ} m.h
+	${CC} ${filter %.o,$^} -o $@
 
 %.o: %.c
 	${CC} -c -o $@ $^
