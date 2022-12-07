@@ -10,10 +10,13 @@ NAME := school
 
 .PHONY = all
 
-all: ${NAME}
+all: ${OBJ} m.h
+	${CC} ${filter %.o,$^} -o ${NAME}
 
-${NAME}: ${OBJ} m.h
-	${CC} ${filter %.o,$^} -o $@
+#all: ${NAME}
+
+#${NAME}: ${OBJ} m.h
+#	${CC} ${filter %.o,$^} -o $@
 
 #%.o: %.c m.h
 #	${CC}    -c -o $@ $<
