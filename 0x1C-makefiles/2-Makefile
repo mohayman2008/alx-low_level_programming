@@ -15,5 +15,5 @@ all: ${NAME}
 ${NAME}: ${OBJ} m.h
 	${CC} ${filter %.o,$^} -o $@
 
-%.o: %.c m.h
-	${CC} -c -o $@ $<
+#%.o: %.c m.h
+#	${CC}    -c -o $@ $<
