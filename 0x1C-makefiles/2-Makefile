@@ -1,7 +1,22 @@
-CC := gcc
-SRC := main.c school.c
-OBJ := ${SRC:%.c=%.o}
-NAME := school
+CC = gcc
+SRC = main.c school.c
+OBJ = ${SRC:%.c=%.o}
+NAME = school
 
-all: ${OBJ}
-	${CC} ${OBJ} -o ${NAME}
+# Build the executable
+#
+# USAGE:
+# make | make all  # Creates 'school' executable
+
+.PHONY = all
+
+all: ${OBJ} m.h
+	${CC} ${filter %.o,$^} -o ${NAME}
+
+#all: ${NAME}
+
+#${NAME}: ${OBJ} m.h
+#	${CC} ${filter %.o,$^} -o $@
+
+#%.o: %.c m.h
+#	${CC}    -c -o $@ $<
