@@ -8,8 +8,8 @@
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -pedantic
 SRC = main.c school.c
-#OBJ = ${SRC:.c=.o}
-OBJ = ${SRC:%.c=%.o}
+OBJ = ${SRC:.c=.o}
+# OBJ = ${SRC:%.c=%.o}
 REQ = m.h
 NAME = school
 TEMPS = *~ '\#'*'\#' .*.swp
