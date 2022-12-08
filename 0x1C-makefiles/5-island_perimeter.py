@@ -4,7 +4,7 @@
 
 def island_perimeter(grid):
     """Returns the perimeter of the island described in grid"""
-    if len(grid) < 3 or len(grid[0]) < 3:
+    if len(grid) < 1:
         return 0
     rows = 0
     row_counter = [0 for i in range(len(grid[0]))]
