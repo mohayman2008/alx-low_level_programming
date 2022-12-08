@@ -6,17 +6,15 @@
 # make rm			# Forces recompilation of all source files
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -pedantic
 SRC = main.c school.c
 OBJ = $(SRC:.c=.o)
-# OBJ = ${SRC:%.c=%.o}
-# REQ = m.h
 NAME = school
+CFLAGS = -Wall -Werror -Wextra -pedantic
+# OBJ = ${SRC:%.c=%.o}
 # TEMPS = *~ '\#'*'\#' .*.swp
 
 .PHONY = all clean oclean fclean re
 
-# all: $(REQ) $(OBJ)
 all: m.h $(OBJ)
 	$(CC) $(OBJ) -o $(NAME)
 
@@ -28,4 +26,4 @@ oclean:
 
 fclean: clean oclean
 
-re: oclean all
+re: fclean all
