@@ -11,7 +11,7 @@ def island_perimeter(grid):
 
     for row in grid:
         not_empty = 0
-        j = 1
+        j = 0
         for cell in row:
             if cell == 1:
                 row_counter[j] = 1
