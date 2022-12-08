@@ -8,6 +8,7 @@
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -pedantic
 SRC = main.c school.c
+#OBJ = ${SRC:.c=.o}
 OBJ = ${SRC:%.c=%.o}
 REQ = m.h
 NAME = school
@@ -15,7 +16,8 @@ TEMPS = *~ '\#'*'\#' .*.swp
 
 .PHONY = all clean oclean fclean re
 
-all: ${REQ} ${NAME}
+all: ${REQ} ${OBJ}
+	${CC} ${OBJ} -o ${NAME}
 
 clean:
 	${RM} ${TEMPS} ${NAME}
@@ -26,9 +28,3 @@ oclean:
 fclean: clean oclean
 
 re: oclean all
-
-${NAME}: ${REQ} ${OBJ}
-	${CC} ${filter %.o,$^} -o $@
-
-#%.o: %.c m.h
-#	${CC} ${CFLAGS} -c -o $@ $<
