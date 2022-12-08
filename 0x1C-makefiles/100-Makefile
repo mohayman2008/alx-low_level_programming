@@ -10,17 +10,18 @@ CFLAGS = -Wall -Werror -Wextra -pedantic
 SRC = main.c school.c
 OBJ = $(SRC:.c=.o)
 # OBJ = ${SRC:%.c=%.o}
-REQ = m.h
+# REQ = m.h
 NAME = school
-TEMPS = *~ '\#'*'\#' .*.swp
+# TEMPS = *~ '\#'*'\#' .*.swp
 
 .PHONY = all clean oclean fclean re
 
-all: $(REQ) $(OBJ)
+# all: $(REQ) $(OBJ)
+all: m.h $(OBJ)
 	$(CC) $(OBJ) -o $(NAME)
 
 clean:
-	$(RM) $(TEMPS) $(NAME)
+	$(RM) *~ $(NAME)
 
 oclean:
 	$(RM) $(OBJ)
