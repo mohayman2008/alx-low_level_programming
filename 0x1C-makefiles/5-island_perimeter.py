@@ -9,10 +9,10 @@ def island_perimeter(grid):
     rows = 0
     row_counter = [0 for i in range(len(grid[0]))]
 
-    for row in grid[1:-1]:
+    for row in grid:
         not_empty = 0
         j = 1
-        for cell in row[1:-1]:
+        for cell in row:
             if cell == 1:
                 row_counter[j] = 1
                 not_empty = 1
