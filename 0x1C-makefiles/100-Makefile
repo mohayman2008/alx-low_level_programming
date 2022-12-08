@@ -1,19 +1,10 @@
-# USAGE:
-# make | make all	# Creates 'school' executable
-# make clean		# Deletes all Emacs and Vim temporary files along with the executable
-# make oclean		# Deletes the object files
-# make fclean		# Deletes the object files, the executable and all Emacs and Vim temporary files.
-# make rm			# Forces recompilation of all source files
-
 CC = gcc
 SRC = main.c school.c
 OBJ = $(SRC:.c=.o)
 NAME = school
 CFLAGS = -Wall -Werror -Wextra -pedantic
-# OBJ = ${SRC:%.c=%.o}
-# TEMPS = *~ '\#'*'\#' .*.swp
 
-.PHONY = all clean oclean fclean re
+.PHONY: all clean oclean fclean re
 
 all: m.h $(OBJ)
 	$(CC) $(OBJ) -o $(NAME)
@@ -26,4 +17,4 @@ oclean:
 
 fclean: clean oclean
 
-re: fclean all
+re: fclean all 
