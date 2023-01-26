@@ -12,7 +12,7 @@ NAME = school
 RM = rm -f
 TEMPS = *~ '\#'*'\#' .*.swp
 
-.PHONY = all clean oclean fclean re
+.PHONY: all clean oclean fclean re
 
 all: ${NAME}
 
