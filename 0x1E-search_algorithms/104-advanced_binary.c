@@ -27,15 +27,10 @@ int advanced_binary(int *array, size_t size, int value)
 	putchar('\n');
 
 	mid = (size - 1) / 2;
-	if (array[mid] == value)
-	{
-		if (mid == 0 || array[mid - 1] != value)
-			return (mid);
-		idx = advanced_binary(array, mid + 1, value);
-		return (idx < 0 ? (int)mid : idx);
-	}
-	if (array[mid] > value)
-		return (advanced_binary(array, mid, value));
+	if (array[mid] == value && (mid == 0 || array[mid - 1] != value))
+		return (mid);
+	if (array[mid] >= value)
+		return (advanced_binary(array, mid + 1, value));
 	idx = advanced_binary(array + mid + 1, size - mid - 1, value);
 	return (idx < 0 ? idx : (int)mid + 1 + idx);
 }
