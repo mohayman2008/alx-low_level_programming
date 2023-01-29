@@ -29,8 +29,8 @@ int advanced_binary(int *array, size_t size, int value)
 	mid = (size - 1) / 2;
 	if (array[mid] == value)
 	{
-		if (mid == 0)
-			return (mid);
+		if (*array == value)
+			return (0);
 		idx = advanced_binary(array, mid + 1, value);
 		return (idx < 0 ? (int)mid : idx);
 	}
