@@ -5,7 +5,7 @@
  * jump_search - Searches for a value in an array of integers
  *		using the Jump search algorithm
  *
- * @array: Pointer to an integers array to search in
+ * @array: Pointer to an ascendingly ordered integers array to search in
  * @size: Number of elements in <array>
  * @value: The value to search for
  *
