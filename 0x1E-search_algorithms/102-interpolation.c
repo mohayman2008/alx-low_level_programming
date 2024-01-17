@@ -13,13 +13,11 @@
 */
 int interpolation_search(int *array, size_t size, int value)
 {
-	int pos, start = 0, end, size_i;
+	int pos, start = 0, end = size - 1, size_i = size;
 
 	if (!array || size < 1)
 		return (-1);
 
-	size_i = size;
-	end = size - 1;
 	while (start < end)
 	{
 		pos = start + (((double) (end - start) / (array[end] - array[start]))
